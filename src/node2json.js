@@ -22,18 +22,27 @@ const convertToJson = function(node, options) {
   const keys = Object.keys(node.child);
   for (let index = 0; index < keys.length; index++) {
     var tagname = keys[index];
+    var objTagName = mapTagName(tagname, options)
     if (node.child[tagname] && node.child[tagname].length > 1) {
-      jObj[tagname] = [];
+      jObj[objTagName] = [];
       for (var tag in node.child[tagname]) {
-        jObj[tagname].push(convertToJson(node.child[tagname][tag], options));
+        jObj[objTagName].push(convertToJson(node.child[tagname][tag], options));
       }
     } else {
-      jObj[tagname] = convertToJson(node.child[tagname][0], options);
+      jObj[objTagName] = convertToJson(node.child[tagname][0], options);
     }
   }
 
   //add value
   return jObj;
 };
+
+const mapTagName = (tagName, options) => {
+  var newTagName = tagName;
+  if(options && options.lowercaseFirstLetterInTagNames){
+    newTagName = tagName.replace(/^\w/, (chr) => chr.toLowerCase() );
+  }
+  return newTagName;
+}
 
 exports.convertToJson = convertToJson;

@@ -39,7 +39,8 @@ const defaultOptions = {
   attrValueProcessor: function(a) {
     return a;
   },
-  stopNodes: []
+  stopNodes: [],
+  lowercaseFirstLetterInTagNames: false
   //decodeStrict: false,
 };
 
@@ -62,7 +63,8 @@ const props = [
   'tagValueProcessor',
   'attrValueProcessor',
   'parseTrueNumberOnly',
-  'stopNodes'
+  'stopNodes',
+  'lowercaseFirstLetterInTagNames'
 ];
 exports.props = props;
 
